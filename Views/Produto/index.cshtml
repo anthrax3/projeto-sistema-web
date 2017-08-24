@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Produtos";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>Index</h3>
+
+<p>
+    <a href="\Produto\Novo">Novo Produto</a>
+</p>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var produto in ViewBag.produtos) {
+                <tr>
+                    <td>@produto.Id</td>
+                    <td>@produto.Descricao</td>
+                    <td>@produto.Quantidade</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

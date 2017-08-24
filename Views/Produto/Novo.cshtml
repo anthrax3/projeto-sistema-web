@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Produtos";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>Novo</h3>
+
+<div>
+    <form action="\Produto\Gravar">
+        <label for="description">Descrição</label>
+        <input type="text" id="descricao" name="descricao" />
+
+        <label for="quantidade">Quantidade</label>
+        <input type="text" id="quantidade" name="quantidade" />
+
+        <input type="submit" name="Salvar" />
+    </form>
+</div>
