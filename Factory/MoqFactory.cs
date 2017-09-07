@@ -18,5 +18,14 @@ namespace Ftec.Cadastro.Site.Factory
 
             return produtos;
         }
+
+        public static List<Models.CategoriaDoProduto> GerarListaCategorias(int quantidade) 
+        {
+            List<CategoriaDoProduto> categorias;
+
+            categorias = RandomValue.List<CategoriaDoProduto>(quantidade);
+
+            return categorias;
+        }
     }
 }

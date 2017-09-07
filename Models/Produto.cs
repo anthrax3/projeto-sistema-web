@@ -43,6 +43,6 @@ namespace Ftec.Cadastro.Site.Models
 
         public int Quantidade { get; set; }
         
-        public CategoriaDoProduto Categoria { get; set; }
+        public Guid CategoriaId { get; set; }
     }
 }

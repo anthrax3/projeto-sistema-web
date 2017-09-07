@@ -4,13 +4,34 @@
 <h2>@ViewData["Title"].</h2>
 <h3>Novo</h3>
 
+<!-- DateTime: @ViewBag.date -->
+
 <div>
-    <form action="\Produto\Gravar">
+    <form action="\Produto\Gravar" method="post">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="produto.nome" />
+        <br/>
+
+        <label for="price">Preço</label>
+        <input type="text" id="price" name="produto.preco" />
+        <br/>
+
         <label for="description">Descrição</label>
-        <input type="text" id="descricao" name="descricao" />
+        <input type="text" id="descricao" name="produto.descricao" />
+        <br/>
 
         <label for="quantidade">Quantidade</label>
-        <input type="text" id="quantidade" name="quantidade" />
+        <input type="text" id="quantidade" name="produto.quantidade" />
+        <br/>
+
+        <label for="categoria">Categoria do Produto</label>
+        <select id="categoria" name="produto.categoriaId">
+            @foreach(var categoria in ViewBag.categorias) {
+                <option value="@categoria.Id">
+                    @categoria.Nome
+                </option>
+            }
+        </select>
 
         <input type="submit" name="Salvar" />
     </form>

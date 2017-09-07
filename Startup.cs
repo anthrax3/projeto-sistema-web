@@ -27,6 +27,11 @@ namespace aspnetapp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //In-Memory 
+            services.AddDistributedMemoryCache(); 
+            services.AddSession(options => { 
+                options.IdleTimeout = TimeSpan.FromMinutes(1); //Session Timeout. 
+            }); 
             // Add framework services.
             services.AddMvc();
         }
@@ -49,11 +54,13 @@ namespace aspnetapp
 
             app.UseStaticFiles();
 
+            app.UseSession(); 
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Livros}/{action=Index}/{id?}");
+                    template: "{controller=Produto}/{action=Index}/{id?}");
             });
         }
     }
