@@ -6,42 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Ftec.Cadastro.Site.Factory;
 using Ftec.Cadastro.Site.Models;
-using Ftec.Cadastro.Site.Session;
-// using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Ftec.Cadastro.Site.Controllers
 {
     public class ProdutoController : Controller
     {
-        const string SessionKeyDate = "_Date";
-        // const string SessionKeyList = "_Produto";
+        const string SessionKeyList = "_Produto";
 
+        // [Route("prod")]
         public IActionResult Index()
         {
-            var produtos = Factory.MoqFactory.GerarListaProdutos(10);
+            // var produtos = Factory.MoqFactory.GerarListaProdutos(10);
 
-            HttpContext.Session.Set<DateTime>(SessionKeyDate, DateTime.Now);
+            var json = HttpContext.Session.GetString(SessionKeyList);
 
             // ViewBag - Destinado para transferir qualquer tipo de dado
             // da camada de controller para a view
-            ViewBag.produtos = produtos;
-
-            HttpContext.Session.SetString(SessionKeyList, JsonConvert.SerializeObject(produtos));
+            ViewBag.produtos = json == null ? new List<Produto>() : JsonConvert.DeserializeObject<List<Produto>>(json);
 
             return View();
         }
 
+        // [HttpGet("prod1", Name = "novoregistro")]
         public IActionResult Novo()
         {
-            var categorias = Factory.MoqFactory.GerarListaCategorias(5);
+           var categorias = Factory.MoqFactory.GerarListaCategorias(5);
 
             ViewBag.categorias = categorias;
-
-            ViewBag.date = HttpContext.Session.Get<DateTime>(SessionKeyDate);
-
-            var json = HttpContext.Session.GetString(SessionKeyList);
-
-            ViewBag.produtos = json == null ? new List<Produto>() : JsonConvert.DeserializeObject(json);
 
             return View();
         }
@@ -49,11 +41,6 @@ namespace Ftec.Cadastro.Site.Controllers
         [HttpPost] // Data Anotation - Utilizada para definir uma regra.
         public IActionResult Gravar(Produto produto)
         {
-
-            List<Produto> produtos = new List<Produto>();
-
-            produtos.Add(produto);
-
             // Cria uma variável de sessão contendo o produto.
             //Session["produto"] = produto;
 
@@ -65,10 +52,54 @@ namespace Ftec.Cadastro.Site.Controllers
             // Encerrar uma sessão
             //Session.Abandon();
 
-            HttpContext.Session.Set<List>("produtos", produtos);
+            var json = HttpContext.Session.GetString(SessionKeyList);
+
+            List<Produto> produtos = json == null ? new List<Produto>() : JsonConvert.DeserializeObject<List<Produto>>(json);
+
+            var item = produtos.Where(p => p.Id == produto.Id).FirstOrDefault();
+
+            if (item == null)
+               produtos.Add(produto);
+            else
+            {
+                //modifica os dados do produto encontrado
+                item.Nome = produto.Nome;
+                item.CategoriaId = produto.CategoriaId;
+                item.Nome = produto.Nome;
+                item.Preco = produto.Preco;
+                item.Quantidade = produto.Quantidade;
+
+            }
+
+
+            HttpContext.Session.SetString(SessionKeyList, JsonConvert.SerializeObject(produtos));
 
             // Executa uma ação
             return RedirectToAction("Index");
+        }
+
+        // [HttpGet("prod2/{id}", Name = "editar")]
+        public IActionResult Editar(Guid id)
+        {
+            ViewBag.Title = "Produtos";
+
+            var json = HttpContext.Session.GetString(SessionKeyList);
+
+            List<Produto> produtos = json == null ? new List<Produto>() : JsonConvert.DeserializeObject<List<Produto>>(json);
+
+            foreach(Produto prod in produtos)
+            {
+                if (prod.Id == id)
+                {
+                    ViewBag.produto = prod;
+                }
+            }
+
+            var categorias = Factory.MoqFactory.GerarListaCategorias(5);
+
+            ViewBag.categorias = categorias;
+
+            return View();
         }
     }
 

@@ -1,31 +1,40 @@
 @{
     ViewData["Title"] = "Produtos";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>Novo</h3>
-
-<!-- DateTime: @ViewBag.date -->
+<div class="page-header">
+    <ul  class="nav nav-pills pull-right">
+        <li>
+            @Html.ActionLink("Home", "Index", "Produto")
+        </li>
+        <li>
+            <!--a href="\Produto\Novo">Novo Produto</a-->
+            @Html.ActionLink("Novo Produto", "Novo", "Produto")
+            <!-- @Html.RouteLink("Novo Produto", "novoregistro") -->
+        </li>
+    </ul>
+    <h2 class="text-muted">@ViewData["Title"].</h2>
+</div>
 
 <div>
     <form action="\Produto\Gravar" method="post">
         <label for="name">Nome</label>
-        <input type="text" id="name" name="produto.nome" />
+        <input type="text" id="name" name="produto.nome" class="form-control" />
         <br/>
 
         <label for="price">Preço</label>
-        <input type="text" id="price" name="produto.preco" />
+        <input type="text" id="price" name="produto.preco" class="form-control"/>
         <br/>
 
         <label for="description">Descrição</label>
-        <input type="text" id="descricao" name="produto.descricao" />
+        <input type="text" id="descricao" name="produto.descricao" class="form-control"/>
         <br/>
 
         <label for="quantidade">Quantidade</label>
-        <input type="text" id="quantidade" name="produto.quantidade" />
+        <input type="text" id="quantidade" name="produto.quantidade" class="form-control"/>
         <br/>
 
         <label for="categoria">Categoria do Produto</label>
-        <select id="categoria" name="produto.categoriaId">
+        <select id="categoria" name="produto.categoriaId" class="form-control">
             @foreach(var categoria in ViewBag.categorias) {
                 <option value="@categoria.Id">
                     @categoria.Nome

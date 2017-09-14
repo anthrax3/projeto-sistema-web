@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Produtos";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>Editar</h3>
+
+<div>
+    <form method="post" action="\Produto\Gravar">
+        <input type="hidden" value="@ViewBag.produto.Id" id="Id" name="produto.Id" />
+
+        <label for="descricao">Descrição</label>
+        <input type="text" id="descricao" value="@ViewBag.produto.Descricao" name="produto.descricao" />
+        <br />
+        <label for="quantidade">Quantidade</label>
+        <input type="text" id="quantidade" value="@ViewBag.produto.Quantidade" name="produto.quantidade" />
+        <br />
+        <label for="preco">Preco</label>
+        <input type="text" id="preco" value="@ViewBag.produto.Preco" name="produto.preco" />
+        <br />
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" value="@ViewBag.produto.Nome" name="produto.nome" />
+        <input type="submit" />
+        <br />
+        <label for="categoria">Categoria do Produto</label>
+        <select id="categoria" name="produto.categoriaId">
+            @foreach (var categoria in ViewBag.categorias)
+        {
+            if (categoria.Id == ViewBag.produto.CategoriaId)
+            {
+                    <option selected="selected" value="@categoria.Id">@categoria.Nome</option>
+                }
+                else
+                {
+                    <option value="@categoria.Id">@categoria.Nome</option>
+                }
+            }
+        </select>
+
+    </form>
+</div>

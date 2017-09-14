@@ -1,0 +1,47 @@
+@model Ftec.Cadastro.Site.Models.Produto
+<div class="page-header">
+    <ul  class="nav nav-pills pull-right">
+        <li>
+            @Html.ActionLink("Home", "Index", "Produto")
+        </li>
+        <li>
+            @Html.ActionLink("Novo Produto", "Novo", "Produto")
+        </li>
+    </ul>
+    <h2 class="text-muted">Editar Produto</h2>
+</div>
+
+<div>
+    <form method="post" action="\Produto\Gravar">
+        <input type="hidden" value="@Model.Id" id="Id" name="produto.Id" />
+
+        <label for="descricao">Descrição</label>
+        <input type="text" id="descricao" value="@Model.Descricao" name="produto.descricao" />
+        <br />
+        <label for="quantidade">Quantidade</label>
+        <input type="text" id="quantidade" value="@Model.Quantidade" name="produto.quantidade" />
+        <br />
+        <label for="preco">Preco</label>
+        <input type="text" id="preco" value="@Model.Preco" name="produto.preco" />
+        <br />
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" value="@Model.Nome" name="produto.nome" />
+        <input type="submit" />
+        <br />
+        <label for="categoria">Categoria do Produto</label>
+        <select id="categoria" name="produto.categoriaId">
+            @foreach (var categoria in ViewBag.categorias)
+            {
+                if (categoria.Id == ViewBag.produto.CategoriaId)
+                {
+                    <option selected="selected" value="@categoria.Id">@categoria.Nome</option>
+                }
+                else
+                {
+                    <option value="@categoria.Id">@categoria.Nome</option>
+                }
+            }
+        </select>
+
+    </form>
+</div>
