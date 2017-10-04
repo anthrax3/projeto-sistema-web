@@ -101,6 +101,40 @@ namespace Ftec.Cadastro.Site.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public IActionResult DecrementaEstoque(Guid id)
+        {
+            var json = HttpContext.Session.GetString(SessionKeyList);
+
+            List<Produto> produtos = json == null ? new List<Produto>() : JsonConvert.DeserializeObject<List<Produto>>(json);
+
+            var produto = produtos.Where(p => p.Id == id).FirstOrDefault();
+
+            if (produto != null) {
+                produto.Quantidade--;
+                HttpContext.Session.SetString(SessionKeyList, JsonConvert.SerializeObject(produtos));
+            }
+
+            return Json(produto);
+        }
+
+        [HttpPost]
+        public IActionResult IncrementaEstoque(Guid id)
+        {
+            var json = HttpContext.Session.GetString(SessionKeyList);
+
+            List<Produto> produtos = json == null ? new List<Produto>() : JsonConvert.DeserializeObject<List<Produto>>(json);
+
+            var produto = produtos.Where(p => p.Id == id).FirstOrDefault();
+
+            if (produto != null) {
+                produto.Quantidade++;
+                HttpContext.Session.SetString(SessionKeyList, JsonConvert.SerializeObject(produtos));
+            }
+
+            return Json(produto);
+        }
     }
 
     /*public static class SessionExtensions {

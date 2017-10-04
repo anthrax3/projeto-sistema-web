@@ -29,10 +29,11 @@
                     <!-- @Html.RouteLink("Novo Produto", "novoregistro") -->
                 </li>
             </ul>
-            <h2 class="text-muted">@ViewData["Title"].</h2>
+            @RenderSection("titulo")
+            <h2 class="text-muted">@ViewData["Title"]</h2>
         </div>
         <div id="conteudo">
-            @RenderBody()
+            @RenderSection("conteudo")
         </div>
     </div>
 

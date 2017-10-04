@@ -1,23 +1,33 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Editar</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var produto in ViewBag.produtos) {
+@section titulo {
+    <h2>Listagem de Produto</h2>
+}
+@section conteudo {
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>@produto.Id</td>
-                <td>@produto.Descricao</td>
-                <td>@produto.Quantidade</td>
-                <td>
-                    <!-- <a href="\prod2\@produto.Id">Editar</a> -->
-                    <a href="\Produto\Editar\@produto.Id">Editar</a>
-                </td>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th></th>
+                <th>Editar</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(var produto in ViewBag.produtos) {
+                <tr>
+                    <td>@produto.Id</td>
+                    <td>@produto.Descricao</td>
+                    <td id="quantidade@(produto.Id)">@produto.Quantidade</td>
+                    <td>
+                        <a href="#" class="decrementa" data-id="@produto.Id">-</a>
+                        <a href="#" class="incrementa" data-id="@produto.Id">+</a>
+                    </td>
+                    <td>
+                        <!-- <a href="\prod2\@produto.Id">Editar</a> -->
+                        <a href="\Produto\Editar\@produto.Id">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

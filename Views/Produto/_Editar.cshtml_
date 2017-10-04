@@ -3,19 +3,19 @@
 }
 @section conteudo {
     <form method="post" action="\Produto\Gravar">
-        <input type="hidden" value="@ViewBag.produto.Id" id="Id" name="produto.Id" />
+        <input type="hidden" value="@Model.Id" id="Id" name="produto.Id" />
 
         <label for="descricao">Descrição</label>
-        <input type="text" id="descricao" value="@ViewBag.produto.Descricao" name="produto.descricao" />
+        <input type="text" id="descricao" value="@Model.Descricao" name="produto.descricao" />
         <br />
         <label for="quantidade">Quantidade</label>
-        <input type="text" id="quantidade" value="@ViewBag.produto.Quantidade" name="produto.quantidade" />
+        <input type="text" id="quantidade" value="@Model.Quantidade" name="produto.quantidade" />
         <br />
         <label for="preco">Preco</label>
-        <input type="text" id="preco" value="@ViewBag.produto.Preco" name="produto.preco" />
+        <input type="text" id="preco" value="@Model.Preco" name="produto.preco" />
         <br />
         <label for="nome">Nome</label>
-        <input type="text" id="nome" value="@ViewBag.produto.Nome" name="produto.nome" />
+        <input type="text" id="nome" value="@Model.Nome" name="produto.nome" />
         <input type="submit" />
         <br />
         <label for="categoria">Categoria do Produto</label>

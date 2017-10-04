@@ -1,21 +1,7 @@
-@{
-    ViewData["Title"] = "Produtos";
+@section titulo {
+    <h2>Novo Produto</h2>
 }
-<div class="page-header">
-    <ul  class="nav nav-pills pull-right">
-        <li>
-            @Html.ActionLink("Home", "Index", "Produto")
-        </li>
-        <li>
-            <!--a href="\Produto\Novo">Novo Produto</a-->
-            @Html.ActionLink("Novo Produto", "Novo", "Produto")
-            <!-- @Html.RouteLink("Novo Produto", "novoregistro") -->
-        </li>
-    </ul>
-    <h2 class="text-muted">@ViewData["Title"].</h2>
-</div>
-
-<div>
+@section conteudo {
     <form action="\Produto\Gravar" method="post">
         <label for="name">Nome</label>
         <input type="text" id="name" name="produto.nome" class="form-control" />
@@ -44,4 +30,4 @@
 
         <input type="submit" name="Salvar" />
     </form>
-</div>
+}
