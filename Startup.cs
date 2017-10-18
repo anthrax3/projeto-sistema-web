@@ -14,6 +14,9 @@ namespace aspnetapp
     {
         public Startup(IHostingEnvironment env)
         {
+
+            //GlobalFilters.Filters.Add(new Filtro.FiltroAcesso());
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)

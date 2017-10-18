@@ -15,6 +15,8 @@ namespace Ftec.Cadastro.Site.Controllers
         const string SessionKeyList = "_Produto";
 
         // [Route("prod")]
+        // [Filtro.FiltroAcesso]
+        //[ServiceFilter(typeof(FiltroAcesso))]
         public IActionResult Index()
         {
             // var produtos = Factory.MoqFactory.GerarListaProdutos(10);
