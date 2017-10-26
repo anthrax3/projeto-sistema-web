@@ -36,5 +36,11 @@ namespace Ftec.Cadastro.Site.Controllers
             HttpContext.Session.Remove(SessionKeyLogin);
             return RedirectToAction("Index");
         }
+
+        public IActionResult LockScreen() 
+        {
+            HttpContext.Session.Remove(SessionKeyLogin);
+            return View();
+        }
     }
 }
